@@ -1,0 +1,32 @@
+#%Module1.0####################################################################
+
+
+proc ModulesHelp { } {
+	global _module_name
+
+	puts stderr "The $_module_name modulefile defines the default system paths and"
+	puts stderr "environment variables needed to use the $_module_name libraries and tools."
+	puts stderr ""
+}
+
+set _module_name	[module-info name]
+
+## Change to be user-specifc path
+set approot ~/project-stat/software/boost/1.73.0
+
+module-whatis "       Name: Boost"
+module-whatis "  Long name  Boost C++ libraries"
+module-whatis "    Version  1.73.0"
+module-whatis "   Category  library"
+module-whatis "Description: The Boost libraries"
+module-whatis "        URL  http://www.boost.org/"
+module-whatis ""
+
+## Load python/2 if not already loaded.
+if { [ is-loaded python/2 ] } {} else { module load python/2 }
+
+prepend-path	LD_LIBRARY_PATH	    $approot/lib
+prepend-path    C_INCLUDE_PATH      $approot/include:$approot/include/boost
+prepend-path    CPLUS_INCLUDE_PATH  $approot/include:$approot/include/boost
+## Adds a boost-specific environment variable
+setenv          BOOST_ROOT          $approot
