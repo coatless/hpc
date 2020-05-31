@@ -1,0 +1,25 @@
+#%Module1.0####################################################################
+
+
+proc ModulesHelp { } {
+	global _module_name
+
+	puts stderr "The $_module_name modulefile defines the default system paths and"
+	puts stderr "environment variables needed to use the $_module_name libraries and tools."
+	puts stderr ""
+}
+
+set _module_name	[module-info name]
+
+## Change to be user-specifc path
+set approot ~/project-stat/software/go/1.14.3
+
+module-whatis "       Name: Go"
+module-whatis "  Long name  Go language"
+module-whatis "    Version  1.14.3"
+module-whatis "   Category  library"
+module-whatis "Description: The go programming language"
+module-whatis "        URL  https://golang.org"
+module-whatis ""
+
+prepend-path    PATH            $approot/bin
