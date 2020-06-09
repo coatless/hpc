@@ -1,0 +1,24 @@
+#%Module1.0####################################################################
+
+proc ModulesHelp { } {
+    global _module_name
+
+    puts stderr "The $_module_name modulefile defines the default system paths and"
+    puts stderr "environment variables needed to use $_module_name."
+    puts stderr ""
+}
+
+module-whatis "RStudio Server enabled through a singularity container"
+
+set           rstudio_server_vers   1.3.959
+set           script_root           ~/project-stat/software/rstudio-server/script
+set           img_root              ~/project-stat/singularity
+setenv        singularity_img_root  ~/project-stat/singularity
+set-alias     dl-rstudio-server     "cd ${img_root} && singularity pull --force --name rstudio.simg docker://rocker/rstudio:latest"
+set-alias     job-rstudio-server    "qsub -I -N rstudio-interactive -q stat -l nodes=1:ppn=1,walltime=04:00:00"
+set-alias     launch-rstudio-server "sh ${script_root}/launch-rstudio-server.sh"
+
+if ![ is-loaded 'singularity' ] {
+  module load singularity/3.2.0
+}
+
