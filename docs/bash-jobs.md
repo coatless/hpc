@@ -1,5 +1,33 @@
 # Bash
 
+## Single script
+
+**sim-script.sh**
+
+```bash
+#!/bin/bash
+
+## Ensure that only 2 parameters are passed in ----
+if [ $# -ne 2 ]; then
+    echo "$0: usage: ./sim-script param1 param2"
+    exit 1
+fi
+
+# Retrieve parameters passed in
+param1 = $1
+param2 = $2
+
+echo "param1 = ${param1}; param2 = ${param2}"
+```
+
+- `$#`: number of arguments passed;
+- `$0`: name of the shell or shell script;
+- `$1`: the first argument;
+- `$n`: the nth argument (substitute n with number); 
+- `$*`: all arguments, space issues if unquoted, use `"$@"`; 
+- `$@`: all arguments, expands to separate words; or
+- (**Bonus**) `$?`: Exit status of last script (0 is success).
+
 ## Script with Fixed Parameters
 
 ```bash
