@@ -1,6 +1,7 @@
 site_name: High Performance Computing
 site_url: https://hpc.thecoatlessprofessor.com/
 repo_url: https://github.com/coatless/hpc
+repo_name: coatless/hpc
 site_author: James Balamuta
 site_description: >-
   Tips, tricks, and so much more on harnessing High Performance Computing in
@@ -62,3 +63,16 @@ extra:
       link: https://twitter.com/axiomsofxyz
     - icon: fontawesome/brands/github
       link: https://github.com/coatless/
+
+# Structure
+nav:
+  - Home: index.md
+  - Cluster Computing:
+    - Overview of Cluster Computing: cluster-computing.md
+    - Setting up a work environment: cluster-setup.md
+    - Software: cluster-software.md
+    - Storage: cluster-storage.md
+    - Common Jobs in Bash: bash-jobs.md
+    - Common Jobs in R: r-jobs.md
+  - Appendix:
+    - Book Development Guide: mkdocs.md
