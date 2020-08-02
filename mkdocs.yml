@@ -1,3 +1,64 @@
 site_name: High Performance Computing
+site_url: https://hpc.thecoatlessprofessor.com/
+repo_url: https://github.com/coatless/hpc
+site_author: James Balamuta
+site_description: >-
+  Tips, tricks, and so much more on harnessing High Performance Computing in
+  everyday work.
+
 theme:
   name: material
+  language: en
+  palette:
+    primary: blue
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+google_analytics:
+  - UA-38501058-9
+  - auto
+
+# Enable extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.attr_list
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Add social pages
+extra:
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/axiomsofxyz
+    - icon: fontawesome/brands/github
+      link: https://github.com/coatless/
