@@ -1,6 +1,12 @@
 # Cluster Setup
 
 Within this chapter, we will cover establishing a workspace on the Campus Cluster.
+There are about four different configuration steps.
+
+- Ensure the cluster can easily be accessed from a local computer.
+- Create a space on a project drive for where R packages should be installed.
+- Setup a GitHub access token for pulling software in from private repositories (skip if not needed).
+- Install _R_ packages!
 
 ## SSH
 
