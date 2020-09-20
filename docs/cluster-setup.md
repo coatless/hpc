@@ -1,6 +1,8 @@
 # Cluster Setup
 
-## SSH Tricks (Keys & Aliases)
+Within this chapter, we will cover establishing a workspace on the Campus Cluster.
+
+## SSH
 
 Repetitively typing out login credentials is tedious:
 
@@ -9,19 +11,21 @@ ssh netid@cc-login.campuscluster.illinois.edu
 # password
 ```
 
-There are two tricks that void this and also make locally
-launched script jobs possible.
+There are two tricks that void the necessity to do so. Effectively, we have:
 
-- Public/Private keys
+- Public/Private SSH Keys
     - Passwordless login
 - SSH Config
     - Alias connection names
 
-Instead of entering a password, the local computer can submit a private key to be
-verified by a server. This is a bit more secure and avoids the hassle of constantly
-typing passwords.
+Thus, instead of entering a password, the local computer can submit a private key
+to be verified by a server. Not only is this more secure, but it avoids the
+hassle of constantly typing passwords. Secondly, the connection alias will
+allow for typing `ssh icc` instead of `ssh netid@cc-login.campuscluster.illinois.edu`
 
 #### Generating an SSH Key
+
+On your **local** computer, open up Terminal and type:
 
 ```bash
 ## Run:
@@ -33,15 +37,28 @@ ssh-keygen -t rsa -C "netid@illinois.edu"
 
 #### Copy SSH Key to Server
 
+Next, let's copy the generated key from your **local** computer onto the cluster.
+
 ```bash
 ## Run:
 ssh-copy-id netid@cc-login.campuscluster.illinois.edu
 ```
 
+On macOS, prior to using `ssh-copy-id`, the command will need to be installed.
+[`Homebrew`](https://brew.sh/) provides a formula that will setup the command.
+Install using:
+
+```bash
+# Install homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+# Install the required command binary
+brew install ssh-copy-id
+```
+
 #### Setting up a Configuration
 
-Add^[**Note:** This assumes a default location is used for the SSH key. If there is a custom SSH key location add `IdentityFile ~/.ssh/sshkeyname.key` after the `User` line.]
-the following to `~/.ssh/config`^[**Replace** `netid` with your netid.]
+Inside of `~/.ssh/config`, add the following host configuration. Make sure
+to **replace** `<netid>` value with your personal netid.
 
 ```bash
 Host icc
@@ -49,10 +66,13 @@ Host icc
     User netid
 ```
 
+**Note:** This assumes a default location is used for the SSH key. If there is
+a custom SSH key location add `IdentityFile ~/.ssh/sshkeyname.key`
+after the `User` line.
 
 ## Setup R
 
-### Create library 
+### Create library
 
 ```bash
 mkdir ~/project-stat/r-pkgs
@@ -68,14 +88,14 @@ EOF
 
 ### Setup a GitHub Personal Access Token (PAT)
 
-We briefly summarize the process for getting and registering a 
-[GitHub Personal Access Token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) in _R_. 
+We briefly summarize the process for getting and registering a
+[GitHub Personal Access Token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) in _R_.
 
 [![PAT Token Walkthrough Video](http://img.youtube.com/vi/c14aqVC-Szo/0.jpg)](http://www.youtube.com/watch?v=c14aqVC-Szo "Creating a GitHub PAT Token")
 
 The token may be created at: <https://github.com/settings/tokens>
 
-From there, we can add it to the _R_ session with: 
+From there, we can add it to the _R_ session with:
 
 ```bash
 touch ~/.Renviron
@@ -85,13 +105,13 @@ GITHUB_PAT="your_github_token_here"
 EOF
 ```
 
-Alternatively, within _R_, type:
+Alternatively, within _R_, the token can be added by typing:
 
 ```r
 file.edit("~/.Renviron")
 ```
 
-Then, add: 
+Then, writing in the configuration file:
 
 ```bash
 GITHUB_TOKEN="your_github_token_here"
@@ -101,13 +121,13 @@ GITHUB_PAT="your_github_token_here"
 ### Install *R* packages into library
 
 ```bash
-# Installs your R package to default library.  
-Rscript -e "install.packages('devtools', repos = 'http://ftp.ussg.iu.edu/CRAN/')"
+# Installs your R package to default library.
+Rscript -e "install.packages('remotes', repos = 'http://ftp.ussg.iu.edu/CRAN/')"
 
 # Setup a developmental library to install packages to
-Rscript -e "install.packages('devtools', lib = '~/project-stat/devel-pkg',
+Rscript -e "install.packages('remotes', lib = '~/project-stat/devel-pkg',
                              repos = 'http://ftp.ussg.iu.edu/CRAN/')"
-              
+
 # Install package from GitHub
 Rscript -e "remotes::install_github('coatless/visualize')"
 
@@ -117,11 +137,11 @@ Rscript -e "remotes::install_github('stat385/netid',
 ```
 
 Be careful when using quotations to specify packages. For each of these commands,
-we begin and end with `"` and, thus, inside the command we use `'` to denote 
+we begin and end with `"` and, thus, inside the command we use `'` to denote
 strings. With this approach, escaping character strings is avoided.
 
 The `auth_token` requires the use of **[GitHub Personal Access Token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)**.
-In the prior step, if the `~/.Renviron` contains the `GITHUB_TOKEN` or `GITHUB_PAT`
-variable, there is no need to specify in the `install_*()` call as it will
+In the prior step, if the `~/.Renviron` contains `GITHUB_PAT`
+variable, there is no need to specify in the `install_github()` call as it will
 automatically be picked up.
 
