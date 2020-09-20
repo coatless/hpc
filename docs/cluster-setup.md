@@ -126,28 +126,105 @@ GITHUB_PAT="your_github_token_here"
 
 ### Install *R* packages into library
 
+Prior to installing an _R_ package, make sure to load the appropriate _R_ version
+with:
+
+```r
+module load R/x.y.z
+```
+
+where `x.y.z` is a supported version number, e.g. `module load R/3.6.2` will
+make available _R_ 3.6.2.
+
+Once _R_ is loaded, packages can be installed by entering into _R_ or directly
+from bash. The prior approach will be preferred as it mimics local _R_ installation
+procedures while the latter approach is useful for one-off packages installations.
+
+Enter into an interactive _R_ session from bash by typing:
+
 ```bash
-# Installs your R package to default library.
-Rscript -e "install.packages('remotes', repos = 'http://ftp.ussg.iu.edu/CRAN/')"
+R
+```
 
-# Setup a developmental library to install packages to
-Rscript -e "install.packages('remotes', lib = '~/project-stat/devel-pkg',
-                             repos = 'http://ftp.ussg.iu.edu/CRAN/')"
+Then, inside of _R_, the package installation may be done using:
 
-# Install package from GitHub
-Rscript -e "remotes::install_github('coatless/visualize')"
+```r
+# Install a package
+install.packages('remotes', repos = 'https://cloud.r-project.org')
 
-# Install from a private repository on GitHub
-Rscript -e "remotes::install_github('stat385/netid',
-                                    auth_token = 'abc')"
+# Exit out of R and return to bash.
+q(save = "no")
+```
+
+Unlike the native _R_ installation route, installing packages under bash uses
+the `Rscript` command and requires writing the install command as a string:
+
+```bash
+Rscript -e "install.packages('remotes', repos = 'https://cloud.r-project.org')"
 ```
 
 Be careful when using quotations to specify packages. For each of these commands,
 we begin and end with `"` and, thus, inside the command we use `'` to denote
 strings. With this approach, escaping character strings is avoided.
 
-The `auth_token` requires the use of **[GitHub Personal Access Token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)**.
-In the prior step, if the `~/.Renviron` contains `GITHUB_PAT`
+
+#### Installing Packages into Development Libraries
+
+If you need to use a different library path than what was
+setup as the default, e.g. `~/project-stat/r-libs`, first create the
+directory and, then, specify a path to it with `lib = ''` in `install.packages().
+
+```bash
+mkdir -p ~/project-stat/devel-pkg
+Rscript -e "install.packages('remotes', lib = '~/project-stat/devel-pkg',
+                             repos = 'https://cloud.r-project.org/')"
+```
+
+#### Installing Packages from GitHub
+
+For packages stored on GitHub, there are two variants for installation depending
+on the state of the repository. If the repository is **public**, then the
+standard `install_github("user/repo")` may be used. On the other hand, if
+the repository is **private**, the package installation call must be accompanied
+by a  **[GitHub Personal Access Token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)** in the `auth_token=''` parameter of
+`install_github()`. In the prior step, if the `~/.Renviron` contains `GITHUB_PAT`
 variable, there is no need to specify in the `install_github()` call as it will
 automatically be picked up.
+
+```
+# Install package from GitHub
+Rscript -e "remotes::install_github('coatless/visualize')"
+
+# Install from a private repository on GitHub
+Rscript -e "remotes::install_github('stat385/netid',
+                                     auth_token = 'abc')"
+```
+
+### Parallelized package installation
+
+By default, all users are placed onto the login nodes. Login nodes are configured
+for staging and submitting jobs _not_ for installing software. The best practice and
+absolute fastest way to install software is to use an **interactive job**.
+Interactive jobs place the user directly on a compute node with the
+requested resources, e.g. 10 CPUs or 5GB of memory per CPU.
+
+Before installing multiple _R_ packages, we recommend creating an interactive
+job with:
+
+```bash
+srun --cpus-per-task=10 --pty bash
+```
+
+Once on the interactive node, load the appropriate version of _R_:
+
+```r
+module load R/x.y.z # where x.y.z is the version number
+```
+
+From here, make sure every package installation call uses the `Ncpus =` parameter
+set equal to  the number of cores requested for the interactive job.
+
+```r
+Rscript -e "install.packages('remotes', repos = 'https://cloud.r-project.org', Ncpus = 10L)"
+```
 
