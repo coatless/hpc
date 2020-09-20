@@ -70,16 +70,16 @@ extra:
 # Structure
 nav:
   - Home: index.md
-  - Cluster Computing:
-    - Overview of Cluster Computing: cluster-computing.md
-    - Illinois Cluster Computing:
-      - Possible Clusters: illinois-cluster.md
-      - Request ICC access for Research: https://campuscluster.illinois.edu/new_forms/user_form.php
-      - Request ICC access for Instruction: https://campuscluster.illinois.edu/new_forms/class_form.php
-    - Setting up a work environment: cluster-setup.md
-    - Software: cluster-software.md
-    - Storage: cluster-storage.md
-    - Common Jobs in Bash: bash-jobs.md
-    - Common Jobs in R: r-jobs.md
+  - Overview of Cluster Computing: cluster-computing.md
+  - Illinois Cluster Computing:
+    - Possible Clusters: illinois-cluster.md
+    - Request ICC access for Research: https://campuscluster.illinois.edu/new_forms/user_form.php
+    - Request ICC access for Instruction: https://campuscluster.illinois.edu/new_forms/class_form.php
+  - Setting up a work environment: cluster-setup.md
+  - Software: cluster-software.md
+  - Storage: cluster-storage.md
+  - Job Templates: bash-jobs.md
+  - Common Jobs in Bash: bash-jobs.md
+  - Common Jobs in R: r-jobs.md
   - Appendix:
     - Book Development Guide: mkdocs.md
