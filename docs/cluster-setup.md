@@ -5,7 +5,8 @@ There are about four different configuration steps.
 
 - Ensure the cluster can easily be accessed from a local computer.
 - Enable command shortcuts through aliases.
-- Setup a GitHub access token for pulling software in from private repositories (skip if not needed).
+- Setup a GitHub access token for pulling software in from private repositories
+  (skip if not needed).
 - Create a space on a project drive for where R packages should be installed.
 - Install _R_ packages!
 

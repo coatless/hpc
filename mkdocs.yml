@@ -81,5 +81,6 @@ nav:
   - Job Templates:
     - Common Jobs in Bash: bash-jobs.md
     - Common Jobs in R: r-jobs.md
+    - Remote Compute Jobs in R: r-remote-jobs.md
   - Appendix:
     - Book Development Guide: mkdocs.md
