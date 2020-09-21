@@ -76,23 +76,8 @@ Host icc
 a custom SSH key location add `IdentityFile ~/.ssh/sshkeyname.key`
 after the `User` line.
 
-## Setup R
 
-### Create library
-
-```bash
-mkdir ~/project-stat/r-pkgs
-
-cat << 'EOF' >> ~/.bashrc
-  if [ -n $R_LIBS ]; then
-      export R_LIBS=~/project-stat/r-pkgs:$R_LIBS
-  else
-      export R_LIBS=~/project-stat/r-pkgs
-  fi
-EOF
-```
-
-### Setup a GitHub Personal Access Token (PAT)
+## Optional: Setting up a GitHub Personal Access Token (PAT)
 
 We briefly summarize the process for getting and registering a
 [GitHub Personal Access Token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) in _R_.
@@ -124,7 +109,96 @@ GITHUB_TOKEN="your_github_token_here"
 GITHUB_PAT="your_github_token_here"
 ```
 
-### Install *R* packages into library
+## R Package Storage Location
+
+_R_'s default library directory where packages are installed into is
+found within the user's home directory at:
+
+```bash
+# location for R 3.6.z
+/home/$USER/R/x86_64-pc-linux-gnu-library/3.6
+
+# location for R 4.0.z
+/home/$USER/R/x86_64-pc-linux-gnu-library/4.0
+```
+
+Installing packages into the default location is problematic because any
+files placed within a user's home directory count against the directories
+space quota (~2Gb / 4Gb). As _R_ packages can take a considerable amount of
+space when installed, the best course of action is to change the default
+library directory. Therefore, _R_ packages should be either stored in a
+project directory or a purchased space allocation on the cluster that an
+investor may purchase.
+
+The path to an investor's space is given as:
+
+```bash
+/projects/<investor>/shared/$USER
+```
+
+Frequently, the cluster staff will create a symlink into the investor's
+directory once authorization is given. In the case of **Statistics**, the
+investor name is `stat`, so the directory would be either:
+
+```bash
+/projects/stat/shared/$USER
+# or the symlink version:
+~/project-stat/
+```
+
+In any case, we recommend creating and registering an `r-pkgs` directory
+under the appropriate project space. The registration with _R_ is done using
+the [`R_LIBS_USER` variable](https://stat.ethz.ch/R-manual/R-patched/library/base/html/libPaths.html) in [`~/.Renvion`](https://stat.ethz.ch/R-manual/R-patched/library/base/html/Startup.html).
+
+```bash
+# Setup the .Renviron file in the home directory
+touch ~/.Renviron
+
+# Append a single variable into the Renvironment file
+cat << 'EOF' >> ~/.Renviron
+# Location to R library
+R_LIBS_USER=~/project-stat/R/%p-library/%v
+EOF
+
+# Construct the path
+Rscript -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)'
+```
+
+Under this approach, we have move the location of the default package directory to:
+
+```
+~/project-stat/R/%p-library/%v
+# the expanded version of %p and %v give:
+~/project-stat/R/x86_64-pc-linux-gnu-library/x.y
+```
+
+**Note:** After each minor _R_ version upgrade of R x.y, you will need to
+recreate the package storage directory using:
+
+```r
+Rscript -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)'
+```
+
+One question that arises:
+
+> Why not set up a generic personal library directory called `~/Rlibs`?
+
+We avoided a generic name for two reasons:
+
+1. New "major" releases of _R_ -- and sometime minor versions --
+   are incompatible with the old packages.
+2. Versioning by number allows for graceful downgrades if needed.
+
+In the case of the first bullet, its better to start over from a new directory
+to ensure clean builds.
+
+Though, you could opt not to and remember:
+
+```r
+update.packages(ask = FALSE, checkBuilt = TRUE)
+```
+
+## Install *R* packages into library
 
 Prior to installing an _R_ package, make sure to load the appropriate _R_ version
 with:
@@ -168,7 +242,7 @@ we begin and end with `"` and, thus, inside the command we use `'` to denote
 strings. With this approach, escaping character strings is avoided.
 
 
-#### Installing Packages into Development Libraries
+### Installing Packages into Development Libraries
 
 If you need to use a different library path than what was
 setup as the default, e.g. `~/project-stat/r-libs`, first create the
@@ -180,7 +254,7 @@ Rscript -e "install.packages('remotes', lib = '~/project-stat/devel-pkg',
                              repos = 'https://cloud.r-project.org/')"
 ```
 
-#### Installing Packages from GitHub
+### Installing Packages from GitHub
 
 For packages stored on GitHub, there are two variants for installation depending
 on the state of the repository. If the repository is **public**, then the
