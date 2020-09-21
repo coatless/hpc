@@ -4,8 +4,9 @@ Within this chapter, we will cover establishing a workspace on the Campus Cluste
 There are about four different configuration steps.
 
 - Ensure the cluster can easily be accessed from a local computer.
-- Create a space on a project drive for where R packages should be installed.
+- Enable command shortcuts through aliases.
 - Setup a GitHub access token for pulling software in from private repositories (skip if not needed).
+- Create a space on a project drive for where R packages should be installed.
 - Install _R_ packages!
 
 ## Secure Shell (SSH) Setup
@@ -29,7 +30,7 @@ to be verified by a server. Not only is this more secure, but it avoids the
 hassle of constantly typing passwords. Secondly, the connection alias will
 allow for typing `ssh icc` instead of `ssh netid@cc-login.campuscluster.illinois.edu`
 
-#### Generating an SSH Key
+### Generating an SSH Key
 
 On your **local** computer, open up Terminal and type:
 
@@ -41,7 +42,7 @@ ssh-keygen -t rsa -C "netid@illinois.edu"
 # Enter passphrase (empty for no passphrase): # Write short password
 ```
 
-#### Copy SSH Key to Server
+### Copy SSH Key to Server
 
 Next, let's copy the generated key from your **local** computer onto the cluster.
 
@@ -61,7 +62,7 @@ Install using:
 brew install ssh-copy-id
 ```
 
-#### SSH Config File
+### SSH Config File
 
 Inside of `~/.ssh/config`, add the following host configuration. Make sure
 to **replace** `<netid>` value with your personal netid.
@@ -76,6 +77,43 @@ Host icc
 a custom SSH key location add `IdentityFile ~/.ssh/sshkeyname.key`
 after the `User` line.
 
+## Bash Aliases
+
+Bash has the ability to create command aliases through `alias`. The primary use
+is to take long commands and create short-cuts to avoid typing them. Alternatively,
+this allows one to also rename commonly used commands. For example, one could
+modify the `ls` command to always list each file and show all hidden files with:
+
+```bash
+alias ls='ls -la'` .
+```
+
+We suggest creating a `~/.bash_aliases` on the cluster and filling it with:
+
+```bash
+--8<-- "config/.bash_aliases"
+```
+
+You may download this directly onto the cluster using:
+
+```bash
+wget https://raw.githubusercontent.com/coatless/hpc/master/docs/config/.bash_aliases
+```
+
+To ensure bash aliases are available, we need to add the file to `~/.bashrc`:
+
+```bash
+--8<-- "config/.bashrc"
+```
+
+**Note:** the load modules component is shown
+
+You may download this directly onto the cluster using:
+
+```bash
+rm -rf ~/.bashrc
+wget https://raw.githubusercontent.com/coatless/hpc/master/docs/config/.bashrc
+```
 
 ## Optional: GitHub Personal Access Token (PAT)
 
