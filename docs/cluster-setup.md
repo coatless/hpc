@@ -8,7 +8,7 @@ There are about four different configuration steps.
 - Setup a GitHub access token for pulling software in from private repositories (skip if not needed).
 - Install _R_ packages!
 
-## SSH
+## Secure Shell (SSH) Setup
 
 Repetitively typing out login credentials is tedious:
 
@@ -61,7 +61,7 @@ Install using:
 brew install ssh-copy-id
 ```
 
-#### Setting up a Configuration
+#### SSH Config File
 
 Inside of `~/.ssh/config`, add the following host configuration. Make sure
 to **replace** `<netid>` value with your personal netid.
@@ -77,7 +77,7 @@ a custom SSH key location add `IdentityFile ~/.ssh/sshkeyname.key`
 after the `User` line.
 
 
-## Optional: Setting up a GitHub Personal Access Token (PAT)
+## Optional: GitHub Personal Access Token (PAT)
 
 We briefly summarize the process for getting and registering a
 [GitHub Personal Access Token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) in _R_.
@@ -109,7 +109,7 @@ GITHUB_TOKEN="your_github_token_here"
 GITHUB_PAT="your_github_token_here"
 ```
 
-## R Package Storage Location
+## Default _R_ Package Storage Location
 
 _R_'s default library directory where packages are installed into is
 found within the user's home directory at:
@@ -198,7 +198,7 @@ Though, you could opt not to and remember:
 update.packages(ask = FALSE, checkBuilt = TRUE)
 ```
 
-## Install *R* packages into library
+## Install _R_ packages into library
 
 Prior to installing an _R_ package, make sure to load the appropriate _R_ version
 with:
