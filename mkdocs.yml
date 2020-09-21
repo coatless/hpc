@@ -78,7 +78,7 @@ nav:
   - Software: cluster-software.md
   - Storage: cluster-storage.md
   - Setting up a work environment: cluster-setup.md
-  - Job Templates: bash-jobs.md
+  - Job Templates:
     - Common Jobs in Bash: bash-jobs.md
     - Common Jobs in R: r-jobs.md
   - Appendix:
