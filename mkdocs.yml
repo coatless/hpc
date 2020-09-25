@@ -88,7 +88,7 @@ nav:
   - Setting up a work environment: cluster-setup.md
   - Job Templates:
     - Slurm:
-      - Single Job using R: slurm/r-jobs.md
+      - Single Job using R: slurm/single-job-r.md
       - Array Jobs with R: slurm/array-jobs-r.md
       - Custom Array Job Creation with R: slurm/custom-array-jobs-creation-r.md
       - Common Jobs in Bash: slurm/bash-jobs.md
