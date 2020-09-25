@@ -83,7 +83,7 @@ nav:
     - Slurm:
       - Single Job using R: slurm/r-jobs.md
       - Array Jobs with R: slurm/array-jobs-r.md
-      - Faux Array Jobs with R: slurm/faux-array-jobs-r.md
+      - Custom Array Job Creation with R: slurm/faux-array-jobs-r.md
       - Common Jobs in Bash: slurm/bash-jobs.md
     - PBS:
       - Common Jobs in Bash: pbs/bash-jobs.md
