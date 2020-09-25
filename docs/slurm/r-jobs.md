@@ -16,11 +16,16 @@ $$
 
 ## Sample simulation script
 
+
+**sim_job.R**
+
 ```r
 --8<-- "slurm/scripts/sim_job.R"
 ```
 
 ## Script with Fixed Parameters
+
+**sim_single_launch.slurm**
 
 ```bash
 --8<-- "slurm/scripts/sim_single_launch.slurm"

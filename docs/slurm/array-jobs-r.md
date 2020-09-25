@@ -30,6 +30,8 @@ chmod +x sim_job.R
 
 ## Sample Parameter Inputs
 
+**inputs.txt**
+
 ```bash
 --8<-- "slurm/scripts/inputs.txt"
 ```
