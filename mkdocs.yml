@@ -80,6 +80,9 @@ nav:
   - Storage: cluster-storage.md
   - Setting up a work environment: cluster-setup.md
   - Job Templates:
+    - Slurm:
+      - Common Jobs in Bash: slurm/bash-jobs.md
+      - Common Jobs in R: slurm/r-jobs.md
     - PBS:
       - Common Jobs in Bash: pbs/bash-jobs.md
       - Common Jobs in R: pbs/r-jobs.md
