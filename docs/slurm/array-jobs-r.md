@@ -6,7 +6,7 @@ $$N = \begin{cases}
 250 \\
 500 \\
 750 
-\end{cases}, \sigma = \begin{cases}
+\end{cases}, \mu = \begin{cases}
 0 \\
 1.5
 \end{cases}$$
