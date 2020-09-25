@@ -12,7 +12,7 @@ $$\mu = \begin{cases}
 2
 \end{cases}$$
 
-## Sample simulation script
+## Sample Job Script
 
 **sim_job.R**
 
@@ -39,6 +39,7 @@ chmod +x sim_job.R
 Download a copy onto the cluster with:
 
 ```bash
+# Download a pre-made inputs.txt onto the cluster
 wget https://raw.githubusercontent.com/coatless/hpc/master/docs/slurm/scripts/inputs.txt
 ```
 
@@ -66,7 +67,7 @@ write.table(sim_frame, file = "inputs.txt",
 ```
 
 
-## Script with Fixed Parameters
+## Array Job Launch
 
 **sim_array_launch.slurm**
 
@@ -74,10 +75,14 @@ write.table(sim_frame, file = "inputs.txt",
 --8<-- "slurm/scripts/sim_array_launch.slurm"
 ```
 
-Download a copy onto the cluster with:
+Download a copy and run it on the cluster with:
 
 ```bash
+# Download script file
 wget https://raw.githubusercontent.com/coatless/hpc/master/docs/slurm/scripts/sim_array_launch.slurm
+
+# Submit jobs on cluster
+sbatch sim_array_launch.slurm
 ```
 
 **Note:** `%A` will be replaced by the value of the `SLURM_ARRAY_JOB_ID` environment

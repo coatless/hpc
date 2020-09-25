@@ -18,7 +18,7 @@ $$
 \end{cases}
 $$
 
-## Sample simulation script
+## Sample Job script
 
 **sim_job.R**
 
