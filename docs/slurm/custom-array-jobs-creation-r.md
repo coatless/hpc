@@ -6,17 +6,14 @@ is now available.
 
 Consider the need to obtain random numbers across varying sample sizes and means.
 
-$$
-\mu = \begin{cases}
--1 \\
-0 \\
-2.5 \\
-5
+$$N = \begin{cases}
+250 \\
+500 \\
+750 
 \end{cases}, \sigma = \begin{cases}
-1 \\
-2
-\end{cases}
-$$
+0 \\
+1.5
+\end{cases}$$
 
 ## Sample Job script
 
