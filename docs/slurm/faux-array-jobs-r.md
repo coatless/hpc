@@ -4,6 +4,20 @@
 the job array being disabled long ago. With the switch to Slurm, the job array
 is now available.
 
+Consider the need to obtain random numbers across varying sample sizes and means.
+
+$$
+\mu = \begin{cases}
+-1 \\
+0 \\
+2.5 \\
+5
+\end{cases}, \sigma = \begin{cases}
+1 \\
+2
+\end{cases}
+$$
+
 ## Sample simulation script
 
 **sim_job.R**
@@ -32,20 +46,7 @@ Download a copy onto the cluster with:
 wget https://raw.githubusercontent.com/coatless/hpc/master/docs/slurm/scripts/inputs.txt
 ```
 
-**Note:** Parameters are best generated using `expand.grid()`. Consider the
-need to obtain random numbers across varying sample sizes and means.
-
-$$
-\mu = \begin{cases}
--1 \\
-0 \\
-2.5 \\
-5
-\end{cases}, \sigma = \begin{cases}
-1 \\
-2
-\end{cases}
-$$
+**Note:** Parameters are best generated using `expand.grid()`. 
 
 ```r
 N_vals = c(250, 500, 750)
