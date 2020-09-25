@@ -3,8 +3,8 @@
 ## Storing Data & Code
 
 - Home Directory `~/`
-    - Up to **~2GB** (Soft cap^[Soft caps gently warn the user to lower their storage size.])
-      / **~4GB** (Hard cap^[Hard caps prevent the user from adding new files.]) with **nightly backups**.
+    - Up to **~2GB** (Soft cap)
+      / **~4GB** (Hard cap) with **nightly backups**.
     - Storage is **private**.
 - Project Spaces `/projects/stat/shared/$USER`
     - **~21TB** of shared space with **nightly backups**.
@@ -12,6 +12,9 @@
 - Temporary Networked Storage `/scratch`
     - **~10TB** of space purged after **30 days** with **no backup**.
     - Storage is **private**.
+
+**Soft caps**: gently warn the user to lower their storage size.
+**Hard caps**: prevent the user from adding new files.
 
 ## Backups
 
