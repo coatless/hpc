@@ -49,4 +49,4 @@ cd ${SLURM_SUBMIT_DIR}/${SLURM_JOBID}
 module load R/3.6.2
 
 ## Run R script in batch mode without file output
-Rscript $HOME/sim_runner.R --args 5 10
+Rscript $HOME/sim_job.R --args 5 10

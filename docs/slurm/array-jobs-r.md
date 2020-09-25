@@ -80,7 +80,7 @@ Download a copy and run it on the cluster with:
 # Download script file
 wget https://raw.githubusercontent.com/coatless/hpc/master/docs/slurm/scripts/sim_array_launch.slurm
 
-# Submit jobs on cluster
+# Queue the job on the Cluster
 sbatch sim_array_launch.slurm
 ```
 

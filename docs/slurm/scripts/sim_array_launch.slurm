@@ -58,4 +58,4 @@ module load R/3.6.2
 export PARAMS=`cat ${HOME}/inputs.txt | sed -n ${SLURM_ARRAY_TASK_ID}p`
 
 ## Run R script in batch mode without file output
-Rscript $HOME/sim_runner.R --args $PARAMS
+Rscript $HOME/sim_job.R --args $PARAMS
