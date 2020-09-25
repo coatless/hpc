@@ -23,6 +23,13 @@ google_analytics:
   - UA-38501058-9
   - auto
 
+# Enable MathJax
+# Detailed at: https://squidfunk.github.io/mkdocs-material/reference/mathjax/
+extra_javascript:
+  - assets/javascript/mathjax_config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 # Enable extensions
 markdown_extensions:
   - markdown.extensions.admonition
