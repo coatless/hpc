@@ -1,15 +1,4 @@
 #!/bin/bash
-########################################################
-# sim_single_launch.slurm
-# Single Job Launch
-# Version 2.0.0
-########################################################
-# James Joseph Balamuta
-# balamut2@illinois.edu
-########################################################
-# ## Example
-# sbatch sim_single_launch.slurm
-########################################################
 
 ## Describe requirements for computing ----
 

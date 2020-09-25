@@ -1,15 +1,4 @@
 #!/bin/bash
-########################################################
-# sim_array_launch.slurm
-# Sample Array Job Launch
-# Version 2.0.0
-########################################################
-# James Joseph Balamuta
-# balamut2@illinois.edu
-########################################################
-# ## Example
-# sbatch sim_array_launch.slurm
-########################################################
 
 ## Describe requirements for computing ----
 
