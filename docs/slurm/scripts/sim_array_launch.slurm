@@ -42,11 +42,11 @@
 
 ## Setup computing environment for job ----
 
-## Create a directory for the data output based ## on PBS_JOBID
+## Create a directory for the data output based on the SLURM_ARRAY_JOB_ID
 mkdir -p ${SLURM_SUBMIT_DIR}/${SLURM_ARRAY_JOB_ID}
 
 ## Switch directory into job ID (puts all output here)
-cd ${SLURM_SUBMIT_DIR}/${SLURM_ARRAY_JOB_ID} # Load R
+cd ${SLURM_SUBMIT_DIR}/${SLURM_ARRAY_JOB_ID}
 
 ## Run simulation ----
 

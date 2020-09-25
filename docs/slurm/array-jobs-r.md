@@ -67,10 +67,16 @@ write.table(sim_frame, file = "inputs.txt",
 
 ## Script with Fixed Parameters
 
-**sim_launch.slurm**
+**sim_array_launch.slurm**
 
 ```bash
---8<-- "slurm/scripts/sim_launch.slurm"
+--8<-- "slurm/scripts/sim_array_launch.slurm"
+```
+
+Download a copy onto the cluster with:
+
+```bash
+wget https://raw.githubusercontent.com/coatless/hpc/master/docs/slurm/scripts/sim_array_launch.slurm
 ```
 
 **Note:** `%A` will be replaced by the value of the `SLURM_ARRAY_JOB_ID` environment
