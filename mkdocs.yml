@@ -80,8 +80,9 @@ nav:
   - Storage: cluster-storage.md
   - Setting up a work environment: cluster-setup.md
   - Job Templates:
-    - Common Jobs in Bash: bash-jobs.md
-    - Common Jobs in R: r-jobs.md
+    - PBS:
+      - Common Jobs in Bash: pbs/bash-jobs.md
+      - Common Jobs in R: pbs/r-jobs.md
     - Remote Compute Jobs in R: r-remote-jobs.md
   - Appendix:
     - Book Development Guide: mkdocs.md
