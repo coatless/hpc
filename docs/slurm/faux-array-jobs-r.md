@@ -1,4 +1,8 @@
-# R
+# Submit Multiple Independent Jobs
+
+**Note:** This technique was developed to submit jobs to the cluster due to 
+the job array being disabled long ago. With the switch to Slurm, the job array
+is now available.
 
 ## Sample simulation script
 
@@ -71,10 +75,15 @@ write.table(sim_frame, file = "inputs.txt",
 --8<-- "slurm/scripts/job_builder.sh"
 ```
 
-Download a copy onto the cluster with:
+Download a copy and run on the cluster with:
 
 ```bash
+# Download a copy
 wget https://raw.githubusercontent.com/coatless/hpc/master/docs/slurm/scripts/job_builder.sh
 
+# Enable the script to run.
 chmod +x job_builder.sh
+
+# Submit jobs to the queue
+./job_builder.sh
 ```
