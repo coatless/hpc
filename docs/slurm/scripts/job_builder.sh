@@ -19,11 +19,11 @@
 
 ### Builds the job index
 # Create a sequential range
-array_values=`seq 541 600`
+array_values=`seq 1 3`
 
 # Add individual job values
 # Note: Have a "space" before first element!!!!
-array_values+=" 73 113 223 224 234 272 358 417 442 473 509 512 645 713 814 838 912"
+array_values+=" 4 5"
 
 # Warning: This does _not_ pad numbers meaning job IDs created will _not_ be
 # sorted appropriately on the file system
@@ -49,17 +49,16 @@ for i in $array_values
 do
 
 	cat > ${SLURM_FILE_NAME}${i}.slurm << EOF
-
 #!/bin/bash
 #
 ## Set the maximum amount of runtime
 #SBATCH --time=${WALLTIME}
 ##
 ## Request one node with and one core (multiple under slurm is done with X*Y)
-#SBATCH –-ntasks=1
+#SBATCH --ntasks=1
 ## Name the job and queue it in xthe secondary queue
 #SBATCH --job-name="${SIM_NAME}${i}"
-#SBATCH -–partition="${SIM_QUEUE}"
+#SBATCH --partition="${SIM_QUEUE}"
 ## Declare an output log for all jobs to use:
 #SBATCH --output="${SIM_NAME}.log"
 #SBATCH --mem-per-cpu="${SIM_RAM}"
