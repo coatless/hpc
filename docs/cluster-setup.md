@@ -1,7 +1,7 @@
 # Cluster Setup
 
 Within this chapter, we will cover establishing a workspace on the Campus Cluster.
-There are about four different configuration steps.
+Workspace setup usually requires about 5 different steps. 
 
 - Ensure the cluster can easily be accessed from a local computer.
 - Enable command shortcuts through aliases.
@@ -12,24 +12,32 @@ There are about four different configuration steps.
 
 ## Secure Shell (SSH) Setup
 
-Repetitively typing out login credentials is tedious:
+For accessing a cluster from command line, **Secure Shell (SSH)** is preferred.
+Access to the cluster requires typing out each time:
 
 ```bash
 ssh netid@cc-login.campuscluster.illinois.edu
 # password
 ```
 
+Connecting in this manner is tedious since it involves repetitively typing out login credentials.
 There are two tricks that void the necessity to do so. Effectively, we have:
 
-- Public/Private SSH Keys
-    - Passwordless login
-- SSH Config
-    - Alias connection names
+- Passwordless login
+    - Public/Private SSH Keys
+- Alias connection names 
+    - SSH Config
 
 Thus, instead of entering a password, the local computer can submit a private key
 to be verified by a server. Not only is this more secure, but it avoids the
-hassle of constantly typing passwords. Secondly, the connection alias will
-allow for typing `ssh icc` instead of `ssh netid@cc-login.campuscluster.illinois.edu`
+hassle of remembering the password and typing it out while observers watch. 
+Secondly, the connection alias will allow for typing:
+
+```bash
+ssh icc
+``` 
+
+Not bad eh?
 
 ### Generating an SSH Key
 
