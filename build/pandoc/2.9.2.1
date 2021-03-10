@@ -1,0 +1,28 @@
+#%Module1.0####################################################################
+
+
+proc ModulesHelp { } {
+	global _module_name
+
+	puts stderr "The $_module_name modulefile defines the default system paths and"
+	puts stderr "environment variables needed to use the $_module_name libraries and tools."
+	puts stderr ""
+}
+
+set _module_name	[module-info name]
+
+## Change to be user-specifc path
+set approot ~/project-stat/software/pandoc/2.9.2.1
+
+module-whatis "       Name: pandoc"
+module-whatis "  Long name  pandoc universal document converter"
+module-whatis "    Version  2.9.2.1"
+module-whatis "   Category  library"
+module-whatis "Description: The pandoc universal document converter"
+module-whatis "        URL  https://pandoc.org/"
+module-whatis ""
+
+## Load texlive/2019 if not already loaded.
+if { [ is-loaded texlive/2019 ] } {} else { module load texlive/2019 }
+
+prepend-path    PATH            $approot/bin

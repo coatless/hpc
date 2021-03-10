@@ -1,0 +1,1183 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Tips, tricks, and so much more on harnessing High Performance Computing in everyday work.">
+      
+      
+      
+        <meta name="author" content="James Balamuta">
+      
+      
+        <link rel="canonical" href="https://hpc.thecoatlessprofessor.com/cluster-setup/">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.5">
+    
+    
+      
+        <title>Setting up a work environment - High Performance Computing</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.77f3fd56.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#2094f3">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-38501058-9","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue" data-md-color-accent="">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cluster-setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://hpc.thecoatlessprofessor.com/" title="High Performance Computing" class="md-header__button md-logo" aria-label="High Performance Computing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            High Performance Computing
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Setting up a work environment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/coatless/hpc/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    coatless/hpc
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://hpc.thecoatlessprofessor.com/" title="High Performance Computing" class="md-nav__button md-logo" aria-label="High Performance Computing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    High Performance Computing
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/coatless/hpc/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    coatless/hpc
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cluster-computing/" class="md-nav__link">
+        Overview of Cluster Computing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Illinois Cluster Computing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Illinois Cluster Computing" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Illinois Cluster Computing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../illinois-cluster.md" class="md-nav__link">
+        Possible Clusters
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://campuscluster.illinois.edu/new_forms/user_form.php" class="md-nav__link">
+        Request ICC access for Research
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://campuscluster.illinois.edu/new_forms/class_form.php" class="md-nav__link">
+        Request ICC access for Instruction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cluster-software/" class="md-nav__link">
+        Software
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cluster-storage/" class="md-nav__link">
+        Storage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Setting up a work environment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Setting up a work environment
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#secure-shell-ssh-setup" class="md-nav__link">
+    Secure Shell (SSH) Setup
+  </a>
+  
+    <nav class="md-nav" aria-label="Secure Shell (SSH) Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generating-an-ssh-key" class="md-nav__link">
+    Generating an SSH Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-ssh-key-to-server" class="md-nav__link">
+    Copy SSH Key to Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-config-file" class="md-nav__link">
+    SSH Config File
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bash-aliases" class="md-nav__link">
+    Bash Aliases
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-github-personal-access-token-pat" class="md-nav__link">
+    Optional: GitHub Personal Access Token (PAT)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-r-package-storage-location" class="md-nav__link">
+    Default R Package Storage Location
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-r-packages-into-library" class="md-nav__link">
+    Install R packages into library
+  </a>
+  
+    <nav class="md-nav" aria-label="Install R packages into library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-packages-into-development-libraries" class="md-nav__link">
+    Installing Packages into Development Libraries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-packages-from-github" class="md-nav__link">
+    Installing Packages from GitHub
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallelized-package-installation" class="md-nav__link">
+    Parallelized package installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      <label class="md-nav__link" for="__nav_7">
+        Job Templates
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Job Templates" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Job Templates
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
+      
+      <label class="md-nav__link" for="__nav_7_1">
+        Slurm
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Slurm" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Slurm
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slurm/single-job-r/" class="md-nav__link">
+        Single Job using R
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slurm/array-jobs-r/" class="md-nav__link">
+        Array Jobs with R
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slurm/custom-array-jobs-creation-r/" class="md-nav__link">
+        Custom Array Job Creation with R
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slurm/bash-jobs/" class="md-nav__link">
+        Common Jobs in Bash
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
+      
+      <label class="md-nav__link" for="__nav_7_2">
+        PBS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="PBS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          PBS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pbs/bash-jobs/" class="md-nav__link">
+        Common Jobs in Bash
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pbs/r-jobs/" class="md-nav__link">
+        Common Jobs in R
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../r-remote-jobs.md" class="md-nav__link">
+        Remote Compute Jobs in R
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        Appendix
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Appendix" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Appendix
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mkdocs/" class="md-nav__link">
+        Book Development Guide
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#secure-shell-ssh-setup" class="md-nav__link">
+    Secure Shell (SSH) Setup
+  </a>
+  
+    <nav class="md-nav" aria-label="Secure Shell (SSH) Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generating-an-ssh-key" class="md-nav__link">
+    Generating an SSH Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-ssh-key-to-server" class="md-nav__link">
+    Copy SSH Key to Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-config-file" class="md-nav__link">
+    SSH Config File
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bash-aliases" class="md-nav__link">
+    Bash Aliases
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-github-personal-access-token-pat" class="md-nav__link">
+    Optional: GitHub Personal Access Token (PAT)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-r-package-storage-location" class="md-nav__link">
+    Default R Package Storage Location
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-r-packages-into-library" class="md-nav__link">
+    Install R packages into library
+  </a>
+  
+    <nav class="md-nav" aria-label="Install R packages into library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-packages-into-development-libraries" class="md-nav__link">
+    Installing Packages into Development Libraries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-packages-from-github" class="md-nav__link">
+    Installing Packages from GitHub
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallelized-package-installation" class="md-nav__link">
+    Parallelized package installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/coatless/hpc/edit/master/docs/cluster-setup.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="cluster-setup">Cluster Setup<a class="headerlink" href="#cluster-setup" title="Permanent link">&para;</a></h1>
+<p>Within this chapter, we will cover establishing a workspace on the Campus Cluster.
+Workspace setup usually requires about 5 different steps. </p>
+<ul>
+<li>Ensure the cluster can easily be accessed from a local computer.</li>
+<li>Enable command shortcuts through aliases.</li>
+<li>Setup a GitHub access token for pulling software in from private repositories
+  (skip if not needed).</li>
+<li>Create a space on a project drive for where R packages should be installed.</li>
+<li>Install <em>R</em> packages!</li>
+</ul>
+<h2 id="secure-shell-ssh-setup">Secure Shell (SSH) Setup<a class="headerlink" href="#secure-shell-ssh-setup" title="Permanent link">&para;</a></h2>
+<p>For accessing a cluster from command line, <strong>Secure Shell (SSH)</strong> is preferred.
+Access to the cluster requires typing out each time:</p>
+<div class="highlight"><pre><span></span><code>ssh netid@cc-login.campuscluster.illinois.edu
+<span class="c1"># password</span>
+</code></pre></div>
+<p>Connecting in this manner is tedious since it involves repetitively typing out login credentials.
+There are two tricks that void the necessity to do so. Effectively, we have:</p>
+<ul>
+<li>Passwordless login<ul>
+<li>Public/Private SSH Keys</li>
+</ul>
+</li>
+<li>Alias connection names <ul>
+<li>SSH Config</li>
+</ul>
+</li>
+</ul>
+<p>Thus, instead of entering a password, the local computer can submit a private key
+to be verified by a server. Not only is this more secure, but it avoids the
+hassle of remembering the password and typing it out while observers watch. 
+Secondly, the connection alias will allow for typing:</p>
+<div class="highlight"><pre><span></span><code>ssh icc
+</code></pre></div>
+<p>Not bad eh?</p>
+<h3 id="generating-an-ssh-key">Generating an SSH Key<a class="headerlink" href="#generating-an-ssh-key" title="Permanent link">&para;</a></h3>
+<p>On your <strong>local</strong> computer, open up Terminal and type:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## Run:</span>
+ssh-keygen -t rsa -C <span class="s2">&quot;netid@illinois.edu&quot;</span>
+<span class="c1">## Respond to:</span>
+<span class="c1"># Enter file in which to save the key (/home/demo/.ssh/id_rsa): # [Press enter]</span>
+<span class="c1"># Enter passphrase (empty for no passphrase): # Write short password</span>
+</code></pre></div>
+<h3 id="copy-ssh-key-to-server">Copy SSH Key to Server<a class="headerlink" href="#copy-ssh-key-to-server" title="Permanent link">&para;</a></h3>
+<p>Next, let's copy the generated key from your <strong>local</strong> computer onto the cluster.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## Run:</span>
+ssh-copy-id netid@cc-login.campuscluster.illinois.edu
+</code></pre></div>
+<p>On macOS, prior to using <code>ssh-copy-id</code>, the command will need to be installed.
+<a href="https://brew.sh/"><code>Homebrew</code></a> provides a formula that will setup the command.
+Install using:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install homebrew</span>
+/bin/bash -c <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+<span class="c1"># Install the required command binary</span>
+brew install ssh-copy-id
+</code></pre></div>
+<h3 id="ssh-config-file">SSH Config File<a class="headerlink" href="#ssh-config-file" title="Permanent link">&para;</a></h3>
+<p>Inside of <code>~/.ssh/config</code>, add the following host configuration. Make sure
+to <strong>replace</strong> <code>&lt;netid&gt;</code> value with your personal netid.</p>
+<div class="highlight"><pre><span></span><code>Host icc
+    HostName cc-login.campuscluster.illinois.edu
+    User netid
+</code></pre></div>
+<p><strong>Note:</strong> This assumes a default location is used for the SSH key. If there is
+a custom SSH key location add <code>IdentityFile ~/.ssh/sshkeyname.key</code>
+after the <code>User</code> line.</p>
+<h2 id="bash-aliases">Bash Aliases<a class="headerlink" href="#bash-aliases" title="Permanent link">&para;</a></h2>
+<p>Bash has the ability to create command aliases through <code>alias</code>. The primary use
+is to take long commands and create short-cuts to avoid typing them. Alternatively,
+this allows one to also rename commonly used commands. For example, one could
+modify the <code>ls</code> command to always list each file and show all hidden files with:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">alias</span> <span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls -la&#39;</span><span class="sb">`</span> .
+</code></pre></div>
+<p>We suggest creating a <code>~/.bash_aliases</code> on the cluster and filling it with:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Learn about own job progress</span>
+<span class="nb">alias</span> <span class="nv">jobs_info</span><span class="o">=</span><span class="s1">&#39;sacct -u $USER&#39;</span>
+<span class="nb">alias</span> <span class="nv">jobs_user</span><span class="o">=</span><span class="s1">&#39;squeue -u $USER&#39;</span>
+<span class="nb">alias</span> <span class="nv">jobs_active</span><span class="o">=</span><span class="s1">&#39;squeue -u $USER --states=RUNNING&#39;</span>
+<span class="nb">alias</span> <span class="nv">jobs_waiting</span><span class="o">=</span><span class="s1">&#39;squeue -u $USER --states=PENDING&#39;</span>
+<span class="nb">alias</span> <span class="nv">jobs_n</span><span class="o">=</span><span class="s1">&#39;squeue -u $USER --states=RUNNING | wc -l&#39;</span>
+
+<span class="c1"># Learn about cluster work</span>
+<span class="nb">alias</span> <span class="nv">jobs_stat</span><span class="o">=</span><span class="s1">&#39;squeue -o &quot;%8i %12j %4t %10u %20q %20a %10g %20P %10Q %5D %11l %11L %R&quot; -p &quot;stat&quot;&#39;</span>
+<span class="nb">alias</span> <span class="nv">node_config</span><span class="o">=</span><span class="s1">&#39;sinfo -o &quot;%20P %5D %14F %8z %10m %10d %11l %16f %N&quot;&#39;</span>
+
+<span class="c1"># Quick action job manipulations</span>
+<span class="nb">alias</span> <span class="nv">jobs_hold</span><span class="o">=</span><span class="s1">&#39;scontrol hold&#39;</span>
+<span class="nb">alias</span> <span class="nv">jobs_release</span><span class="o">=</span><span class="s1">&#39;scontrol release&#39;</span>
+<span class="nb">alias</span> <span class="nv">jobs_kill_all</span><span class="o">=</span><span class="s1">&#39;scancel -u $USER&#39;</span>
+<span class="nb">alias</span> <span class="nv">jobs_kill</span><span class="o">=</span><span class="s1">&#39;scancel&#39;</span>
+
+<span class="c1"># Run an interactive job</span>
+<span class="nb">alias</span> <span class="nv">si</span><span class="o">=</span><span class="s1">&#39;srun --cpus-per-task=5 --pty bash&#39;</span>
+</code></pre></div>
+<p>You may download this directly onto the cluster using:</p>
+<div class="highlight"><pre><span></span><code>wget https://raw.githubusercontent.com/coatless/hpc/master/docs/config/.bash_aliases
+</code></pre></div>
+<p>To ensure bash aliases are available, we need to add the file to <code>~/.bashrc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># .bashrc</span>
+<span class="c1"># Source global definitions</span>
+<span class="k">if</span> <span class="o">[</span> -f /etc/bashrc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    . /etc/bashrc
+<span class="k">fi</span>
+
+<span class="c1"># Source list of alias commands</span>
+<span class="k">if</span> <span class="o">[</span> -f ~/.bash_aliases <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    . ~/.bash_aliases
+<span class="k">fi</span>
+
+<span class="c1"># Auto-load a set of modules</span>
+<span class="k">if</span> <span class="o">[</span> -f ~/.init_modules <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    . ~/.init_modules
+<span class="k">fi</span>
+</code></pre></div>
+<p><strong>Note:</strong> the load modules component is shown</p>
+<p>You may download this directly onto the cluster using:</p>
+<div class="highlight"><pre><span></span><code>rm -rf ~/.bashrc
+wget https://raw.githubusercontent.com/coatless/hpc/master/docs/config/.bashrc
+</code></pre></div>
+<h2 id="optional-github-personal-access-token-pat">Optional: GitHub Personal Access Token (PAT)<a class="headerlink" href="#optional-github-personal-access-token-pat" title="Permanent link">&para;</a></h2>
+<p>We briefly summarize the process for getting and registering a
+<a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use/">GitHub Personal Access Token</a> in <em>R</em>.</p>
+<p><a href="http://www.youtube.com/watch?v=c14aqVC-Szo" title="Creating a GitHub PAT Token"><img alt="PAT Token Walkthrough Video" src="http://img.youtube.com/vi/c14aqVC-Szo/0.jpg" /></a></p>
+<p>The token may be created at: <a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a></p>
+<p>From there, we can add it to the <em>R</em> session with:</p>
+<div class="highlight"><pre><span></span><code>touch ~/.Renviron
+cat <span class="s">&lt;&lt; EOF &gt;&gt; ~/.Renviron</span>
+<span class="s">GITHUB_TOKEN=&quot;your_github_token_here&quot;</span>
+<span class="s">GITHUB_PAT=&quot;your_github_token_here&quot;</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<p>Alternatively, within <em>R</em>, the token can be added by typing:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">file.edit</span><span class="p">(</span><span class="s">&quot;~/.Renviron&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Then, writing in the configuration file:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">GITHUB_TOKEN</span><span class="o">=</span><span class="s2">&quot;your_github_token_here&quot;</span>
+<span class="nv">GITHUB_PAT</span><span class="o">=</span><span class="s2">&quot;your_github_token_here&quot;</span>
+</code></pre></div>
+<h2 id="default-r-package-storage-location">Default <em>R</em> Package Storage Location<a class="headerlink" href="#default-r-package-storage-location" title="Permanent link">&para;</a></h2>
+<p><em>R</em>'s default library directory where packages are installed into is
+found within the user's home directory at:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># location for R 3.6.z</span>
+/home/<span class="nv">$USER</span>/R/x86_64-pc-linux-gnu-library/3.6
+
+<span class="c1"># location for R 4.0.z</span>
+/home/<span class="nv">$USER</span>/R/x86_64-pc-linux-gnu-library/4.0
+</code></pre></div>
+<p>Installing packages into the default location is problematic because any
+files placed within a user's home directory count against the directories
+space quota (~2Gb / 4Gb). As <em>R</em> packages can take a considerable amount of
+space when installed, the best course of action is to change the default
+library directory. Therefore, <em>R</em> packages should be either stored in a
+project directory or a purchased space allocation on the cluster that an
+investor may purchase.</p>
+<p>The path to an investor's space is given as:</p>
+<div class="highlight"><pre><span></span><code>/projects/&lt;investor&gt;/shared/<span class="nv">$USER</span>
+</code></pre></div>
+<p>Frequently, the cluster staff will create a symlink into the investor's
+directory once authorization is given. In the case of <strong>Statistics</strong>, the
+investor name is <code>stat</code>, so the directory would be either:</p>
+<div class="highlight"><pre><span></span><code>/projects/stat/shared/<span class="nv">$USER</span>
+<span class="c1"># or the symlink version:</span>
+~/project-stat/
+</code></pre></div>
+<p>In any case, we recommend creating and registering an <code>r-pkgs</code> directory
+under the appropriate project space. The registration with <em>R</em> is done using
+the <a href="https://stat.ethz.ch/R-manual/R-patched/library/base/html/libPaths.html"><code>R_LIBS_USER</code> variable</a> in <a href="https://stat.ethz.ch/R-manual/R-patched/library/base/html/Startup.html"><code>~/.Renvion</code></a>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Setup the .Renviron file in the home directory</span>
+touch ~/.Renviron
+
+<span class="c1"># Append a single variable into the Renvironment file</span>
+cat <span class="s">&lt;&lt; &#39;EOF&#39; &gt;&gt; ~/.Renviron</span>
+<span class="s"># Location to R library</span>
+<span class="s">R_LIBS_USER=~/project-stat/R/%p-library/%v</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Construct the path</span>
+Rscript -e <span class="s1">&#39;dir.create(Sys.getenv(&quot;R_LIBS_USER&quot;), recursive = TRUE)&#39;</span>
+</code></pre></div>
+<p>Under this approach, we have move the location of the default package directory to:</p>
+<div class="highlight"><pre><span></span><code>~/project-stat/R/%p-library/%v
+# the expanded version of %p and %v give:
+~/project-stat/R/x86_64-pc-linux-gnu-library/x.y
+</code></pre></div>
+<p><strong>Note:</strong> After each minor <em>R</em> version upgrade of R x.y, you will need to
+recreate the package storage directory using:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Rscript</span> <span class="o">-</span><span class="n">e</span> <span class="s">&#39;dir.create(Sys.getenv(&quot;R_LIBS_USER&quot;), recursive = TRUE)&#39;</span>
+</code></pre></div>
+<p>One question that arises:</p>
+<blockquote>
+<p>Why not set up a generic personal library directory called <code>~/Rlibs</code>?</p>
+</blockquote>
+<p>We avoided a generic name for two reasons:</p>
+<ol>
+<li>New "major" releases of <em>R</em> -- and sometime minor versions --
+   are incompatible with the old packages.</li>
+<li>Versioning by number allows for graceful downgrades if needed.</li>
+</ol>
+<p>In the case of the first bullet, its better to start over from a new directory
+to ensure clean builds.</p>
+<p>Though, you could opt not to and remember:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">update.packages</span><span class="p">(</span><span class="n">ask</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">checkBuilt</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="install-r-packages-into-library">Install <em>R</em> packages into library<a class="headerlink" href="#install-r-packages-into-library" title="Permanent link">&para;</a></h2>
+<p>Prior to installing an <em>R</em> package, make sure to load the appropriate <em>R</em> version
+with:</p>
+<div class="highlight"><pre><span></span><code><span class="n">module</span> <span class="n">load</span> <span class="n">R</span><span class="o">/</span><span class="n">x.y.z</span>
+</code></pre></div>
+<p>where <code>x.y.z</code> is a supported version number, e.g. <code>module load R/3.6.2</code> will
+make available <em>R</em> 3.6.2.</p>
+<p>Once <em>R</em> is loaded, packages can be installed by entering into <em>R</em> or directly
+from bash. The prior approach will be preferred as it mimics local <em>R</em> installation
+procedures while the latter approach is useful for one-off packages installations.</p>
+<p>Enter into an interactive <em>R</em> session from bash by typing:</p>
+<div class="highlight"><pre><span></span><code>R
+</code></pre></div>
+<p>Then, inside of <em>R</em>, the package installation may be done using:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install a package</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;remotes&#39;</span><span class="p">,</span> <span class="n">repos</span> <span class="o">=</span> <span class="s">&#39;https://cloud.r-project.org&#39;</span><span class="p">)</span>
+
+<span class="c1"># Exit out of R and return to bash.</span>
+<span class="nf">q</span><span class="p">(</span><span class="n">save</span> <span class="o">=</span> <span class="s">&quot;no&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Unlike the native <em>R</em> installation route, installing packages under bash uses
+the <code>Rscript</code> command and requires writing the install command as a string:</p>
+<div class="highlight"><pre><span></span><code>Rscript -e <span class="s2">&quot;install.packages(&#39;remotes&#39;, repos = &#39;https://cloud.r-project.org&#39;)&quot;</span>
+</code></pre></div>
+<p>Be careful when using quotations to specify packages. For each of these commands,
+we begin and end with <code>"</code> and, thus, inside the command we use <code>'</code> to denote
+strings. With this approach, escaping character strings is avoided.</p>
+<h3 id="installing-packages-into-development-libraries">Installing Packages into Development Libraries<a class="headerlink" href="#installing-packages-into-development-libraries" title="Permanent link">&para;</a></h3>
+<p>If you need to use a different library path than what was
+setup as the default, e.g. <code>~/project-stat/r-libs</code>, first create the
+directory and, then, specify a path to it with <code>lib = ''</code> in `install.packages().</p>
+<div class="highlight"><pre><span></span><code>mkdir -p ~/project-stat/devel-pkg
+Rscript -e <span class="s2">&quot;install.packages(&#39;remotes&#39;, lib = &#39;~/project-stat/devel-pkg&#39;,</span>
+<span class="s2">                             repos = &#39;https://cloud.r-project.org/&#39;)&quot;</span>
+</code></pre></div>
+<h3 id="installing-packages-from-github">Installing Packages from GitHub<a class="headerlink" href="#installing-packages-from-github" title="Permanent link">&para;</a></h3>
+<p>For packages stored on GitHub, there are two variants for installation depending
+on the state of the repository. If the repository is <strong>public</strong>, then the
+standard <code>install_github("user/repo")</code> may be used. On the other hand, if
+the repository is <strong>private</strong>, the package installation call must be accompanied
+by a  <strong><a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use/">GitHub Personal Access Token</a></strong> in the <code>auth_token=''</code> parameter of
+<code>install_github()</code>. In the prior step, if the <code>~/.Renviron</code> contains <code>GITHUB_PAT</code>
+variable, there is no need to specify in the <code>install_github()</code> call as it will
+automatically be picked up.</p>
+<div class="highlight"><pre><span></span><code># Install package from GitHub
+Rscript -e &quot;remotes::install_github(&#39;coatless/visualize&#39;)&quot;
+
+# Install from a private repository on GitHub
+Rscript -e &quot;remotes::install_github(&#39;stat385/netid&#39;,
+                                     auth_token = &#39;abc&#39;)&quot;
+</code></pre></div>
+<h3 id="parallelized-package-installation">Parallelized package installation<a class="headerlink" href="#parallelized-package-installation" title="Permanent link">&para;</a></h3>
+<p>By default, all users are placed onto the login nodes. Login nodes are configured
+for staging and submitting jobs <em>not</em> for installing software. The best practice and
+absolute fastest way to install software is to use an <strong>interactive job</strong>.
+Interactive jobs place the user directly on a compute node with the
+requested resources, e.g. 10 CPUs or 5GB of memory per CPU.</p>
+<p>Before installing multiple <em>R</em> packages, we recommend creating an interactive
+job with:</p>
+<div class="highlight"><pre><span></span><code>srun --cpus-per-task<span class="o">=</span><span class="m">10</span> --pty bash
+</code></pre></div>
+<p>Once on the interactive node, load the appropriate version of <em>R</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">module</span> <span class="n">load</span> <span class="n">R</span><span class="o">/</span><span class="n">x.y.z</span> <span class="c1"># where x.y.z is the version number</span>
+</code></pre></div>
+<p>From here, make sure every package installation call uses the <code>Ncpus =</code> parameter
+set equal to  the number of cores requested for the interactive job.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Rscript</span> <span class="o">-</span><span class="n">e</span> <span class="s">&quot;install.packages(&#39;remotes&#39;, repos = &#39;https://cloud.r-project.org&#39;, Ncpus = 10L)&quot;</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../cluster-storage/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Storage
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../slurm/single-job-r/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Single Job using R
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/axiomsofxyz" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/coatless/" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["instant"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.5cf3e710.min.js"></script>
+      
+        <script src="../assets/javascript/mathjax_config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
